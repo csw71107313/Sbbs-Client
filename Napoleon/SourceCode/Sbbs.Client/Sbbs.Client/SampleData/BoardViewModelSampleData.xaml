@@ -1,0 +1,14 @@
+﻿<local:BoardViewModel 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"       
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Sbbs.Client"
+    xmlns:sbbs="clr-namespace:Sbbs.Core;assembly=Sbbs.Core"    
+    Description="C/C++语言"
+    EnglishName="C_CPlusPlus">
+    <local:BoardViewModel.Topics>
+        <sbbs:TopicModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="20" Read="100" Top="False" Mark="False"/>
+        <sbbs:TopicModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="10" Read="100" Top="False" Mark="False"/>
+        <sbbs:TopicModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="14" Read="100" Top="False" Mark="False"/>
+        <sbbs:TopicModel Title="江南听雨BBS技术站务2011年下半年总结" Author="moqi88" Board="BBSView" Id="43647" Replies="10" Read="100" Top="False" Mark="False"/>
+    </local:BoardViewModel.Topics>
+</local:BoardViewModel>

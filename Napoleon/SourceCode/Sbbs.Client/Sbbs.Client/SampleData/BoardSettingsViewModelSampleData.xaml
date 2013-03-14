@@ -1,0 +1,13 @@
+﻿<local:BoardSettingsViewModel 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"       
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Sbbs.Client">
+    <local:BoardSettingsViewModel.Modes>
+        <local:Mode Id="0" Description="普通模式"/>
+        <local:Mode Id="1" Description="主题模式"/>
+        <local:Mode Id="2" Description="论坛模式"/>
+    </local:BoardSettingsViewModel.Modes>
+    <local:BoardSettingsViewModel.SelectedMode>
+        <local:Mode Id="2" Description="论坛模式"/>
+    </local:BoardSettingsViewModel.SelectedMode>
+</local:BoardSettingsViewModel>

@@ -1,0 +1,39 @@
+﻿<UserControl 
+    x:Class="Sbbs.Client.LoginView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:uc="clr-namespace:Sbbs.Controls;assembly=Sbbs.Controls" 
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480">
+
+    <UserControl.Resources>
+        <uc:BoolConverter x:Key="BoolConverter"/>
+        <uc:BoolToInvisibleConverter x:Key="BoolToInvisibleConverter"/>
+    </UserControl.Resources>
+    
+    <Grid Background="Transparent">
+        <StackPanel Margin="0 10 0 0">
+            <TextBlock Style="{StaticResource PhoneTextSubtleStyle}" Text="用户名:"/>
+            <TextBox Text="{Binding Path=Username, Mode=TwoWay}"
+                     IsEnabled="{Binding Path=UserLoggedIn, Converter={StaticResource BoolConverter}}"/>
+            <TextBlock Style="{StaticResource PhoneTextSubtleStyle}" Text="密码:"
+                       Visibility="{Binding Path=UserLoggedIn, Converter={StaticResource BoolToInvisibleConverter}}"/>
+            <PasswordBox Password="{Binding Path=Password, Mode=TwoWay}"
+                         Visibility="{Binding Path=UserLoggedIn, Converter={StaticResource BoolToInvisibleConverter}}"/>
+        </StackPanel>
+
+        <uc:BindableApplicationBar BarOpacity="1.0" IsVisible="{Binding Path=IsApplicationBarVisible}">
+            <uc:BindableApplicationBarIconButton Text="{Binding Path=LoginText}" 
+                                                 IconUri="/Resources/Images/ApplicationBar.Check.png"
+                                                 Command="{Binding Path=LoginCommand}"/>
+            <uc:BindableApplicationBarIconButton Text="取消" 
+                                                 IconUri="/Resources/Images/ApplicationBar.Cancel.png"
+                                                 Command="{Binding Path=CancelCommand}"/>
+        </uc:BindableApplicationBar>
+    </Grid>
+</UserControl>

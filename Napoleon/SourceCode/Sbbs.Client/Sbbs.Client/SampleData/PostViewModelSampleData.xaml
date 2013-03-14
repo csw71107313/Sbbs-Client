@@ -1,0 +1,9 @@
+﻿<local:PostViewModel
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"       
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Sbbs.Client">
+    <local:PostViewModel.Board>Fujian</local:PostViewModel.Board>
+    <local:PostViewModel.ReId>16205</local:PostViewModel.ReId>
+    <local:PostViewModel.Title>Re: 南京今个好冷</local:PostViewModel.Title>
+    <local:PostViewModel.Content>冷死了</local:PostViewModel.Content>    
+</local:PostViewModel>

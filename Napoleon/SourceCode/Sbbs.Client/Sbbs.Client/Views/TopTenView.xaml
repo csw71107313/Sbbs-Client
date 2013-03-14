@@ -1,0 +1,74 @@
+﻿<UserControl
+    x:Class="Sbbs.Client.TopTenView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls" 
+    xmlns:uc="clr-namespace:Sbbs.Controls;assembly=Sbbs.Controls"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" 
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True"
+    d:DataContext="{d:DesignData /SampleData/TopTenViewModelSampleData.xaml}">
+
+    <Grid>
+        <!-- 十大热帖 -->
+        <controls:PanoramaItem>
+            <controls:PanoramaItem.Header>
+                <TextBlock Text="今日十大" Foreground="{StaticResource PhoneAccentBrush}" FontSize="50"/>
+            </controls:PanoramaItem.Header>
+            <ListBox SelectionChanged="ListBox_SelectionChanged"
+                     ItemsSource="{Binding Path=TopTenTopics}">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <toolkit:ContextMenuService.ContextMenu>
+                                <toolkit:ContextMenu>
+                                    <toolkit:MenuItem Header="进入版面" 
+                                                  Command="{Binding Path=TopTenViewModel.BoardCommand, 
+                                                                    Source={StaticResource ViewModelLocator}}"
+                                                  CommandParameter="{Binding}">
+                                    </toolkit:MenuItem>
+                                </toolkit:ContextMenu>
+                            </toolkit:ContextMenuService.ContextMenu>
+                            <TextBlock Text="{Binding Path=Title}"
+                                       TextWrapping="Wrap"
+                                       Style="{StaticResource PhoneTextLargeStyle}"/>
+                            <Grid>
+                                <TextBlock Text="{Binding Path=Author}" 
+                                           Foreground="{StaticResource PhoneAccentBrush}"
+                                           Style="{StaticResource PhoneTextSubtleStyle}"/>                            
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <TextBlock Text="{Binding Path=Board}" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                                    <TextBlock Text="{Binding Path=Replies}" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                                </StackPanel>
+                            </Grid>
+                            <Line Stroke="#99FFFFFF" StrokeThickness="2" VerticalAlignment="Top" 
+                                  X1="10" Y1="30" X2="460" Y2="30" 
+                                  StrokeDashCap="Round" StrokeDashArray="4" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>       
+            </ListBox>
+        </controls:PanoramaItem>
+
+        <uc:BindableApplicationBar BarOpacity="1.0" IsVisible="{Binding Path=IsApplicationBarVisible}">
+            <uc:BindableApplicationBarIconButton Text="刷新" 
+                                                 IconUri="/Resources/Images/refresh.png"
+                                                 Command="{Binding Path=RefreshCommand}"/>
+            <uc:BindableApplicationBar.MenuItems>
+                <uc:BindableApplicationBarMenuItem  Text="设置" 
+		                                            Command="{Binding Path=SettingsCommand}" />
+            </uc:BindableApplicationBar.MenuItems>
+        </uc:BindableApplicationBar>
+    </Grid>
+</UserControl>

@@ -1,0 +1,130 @@
+﻿<UserControl 
+    x:Class="Sbbs.Client.BoardsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls" 
+    xmlns:uc="clr-namespace:Sbbs.Controls;assembly=Sbbs.Controls" 
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" 
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <uc:BoolToVisibleConverter x:Key="BoolToVisibleConverter"/>
+        </ResourceDictionary>    
+    </UserControl.Resources>
+
+    <Grid>
+        <!-- 讨论区 -->
+        <!--包括收藏夹和所有讨论区-->
+        <controls:PanoramaItem>
+            <controls:PanoramaItem.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="讨论区" Foreground="{StaticResource PhoneAccentBrush}" FontSize="50"/>
+                </StackPanel>
+            </controls:PanoramaItem.Header>
+            <Grid>
+                <StackPanel Orientation="Horizontal" Margin="190,-90,0,0" Height="72"
+                            VerticalAlignment="Top">
+                    <uc:RoundButton Width="72" Height="72" ImageSource="../Resources/Images/favorite.png"
+                                    Command="{Binding Path=FavoriteCommand}"/>
+                    <uc:RoundButton Width="72" Height="72" ImageSource="../Resources/Images/list_bullets.png" 
+                                    Command="{Binding Path=AllBoardsCommand}"
+                                    Margin="20,0,0,0"/>
+                </StackPanel>
+                <!--收藏夹-->
+                <ListBox ItemsSource="{Binding Path=FavoriteItems}"
+                         Visibility="{Binding Path=IsFavoriteVisible,
+                                              Converter={StaticResource BoolToVisibleConverter}}"
+                         SelectionChanged="ListBox_SelectionChanged">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding Path=Description}" 
+                                           TextWrapping="Wrap"
+                                           Style="{StaticResource PhoneTextTitle3Style}"
+                                           Margin="0 10 0 0"/>
+                                <TextBlock Text="{Binding Path=EnglishName}" 
+                                           Foreground="{StaticResource PhoneAccentBrush}"
+                                           HorizontalAlignment="Right"
+                                           Margin="0 10 0 0"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <TextBlock Text="收藏为空" Foreground="{StaticResource PhoneAccentBrush}" 
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           FontSize="25"
+                           Visibility="{Binding Path=IsFavoriteEmpty,
+                                                Converter={StaticResource BoolToVisibleConverter}}"/>
+                <!--所有讨论区-->
+                <controls:Pivot Visibility="{Binding Path=IsAllBoardsVisible,
+                                                     Converter={StaticResource BoolToVisibleConverter}}">
+                    <controls:PivotItem>
+                        <toolkit:LongListSelector ItemsSource="{Binding SectionItems}"
+                                                  DisplayAllGroups="True"
+                                                  SelectionChanged="LongListSelector_SelectionChanged">
+                            <toolkit:LongListSelector.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <TextBlock Text="{Binding Path=Description}" 
+                                                   TextWrapping="Wrap"
+                                                   Style="{StaticResource PhoneTextTitle3Style}"
+                                                   Margin="0 10 0 0"/>
+                                        <TextBlock Text="{Binding Path=EnglishName}" 
+                                                   Foreground="{StaticResource PhoneAccentBrush}"
+                                                   HorizontalAlignment="Right"
+                                                   Margin="0 10 0 0"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </toolkit:LongListSelector.ItemTemplate>
+                            <toolkit:LongListSelector.GroupHeaderTemplate>
+                                <DataTemplate>
+                                    <Border Margin="0,0,0,10"
+                                        Background="{StaticResource PhoneAccentBrush}">
+                                        <TextBlock Text="{Binding Title}"
+                                                   Foreground="White"
+                                                   Style="{StaticResource PhoneTextLargeStyle}"/>
+                                    </Border>
+                                </DataTemplate>
+                            </toolkit:LongListSelector.GroupHeaderTemplate>
+                            <toolkit:LongListSelector.GroupItemTemplate>
+                                <DataTemplate>
+                                    <Border Width="480" Height="60"
+                                        Margin="0,0,0,10"
+                                        Background="{StaticResource PhoneAccentBrush}">
+                                        <TextBlock Text="{Binding Title}" 
+                                                   Foreground="White"
+                                                   Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                    </Border>
+                                </DataTemplate>
+                            </toolkit:LongListSelector.GroupItemTemplate>
+                            <toolkit:LongListSelector.GroupItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <toolkit:WrapPanel HorizontalAlignment="Stretch"/>
+                                </ItemsPanelTemplate>
+                            </toolkit:LongListSelector.GroupItemsPanel>
+                        </toolkit:LongListSelector>
+                    </controls:PivotItem>
+                </controls:Pivot>
+            </Grid>
+        </controls:PanoramaItem>
+
+        <uc:BindableApplicationBar  BarOpacity="1.0" IsVisible="{Binding Path=IsApplicationBarVisible}" Mode="Minimized">
+            <uc:BindableApplicationBar.MenuItems>
+                <uc:BindableApplicationBarMenuItem  Text="设置" 
+		                                            Command="{Binding Path=SettingsCommand}" />
+            </uc:BindableApplicationBar.MenuItems>
+        </uc:BindableApplicationBar>
+    </Grid>
+</UserControl>

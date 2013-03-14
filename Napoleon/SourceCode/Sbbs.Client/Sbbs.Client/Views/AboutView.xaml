@@ -1,0 +1,29 @@
+﻿<UserControl
+    x:Class="Sbbs.Client.AboutView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="480" d:DesignWidth="480"> 
+
+    <StackPanel Orientation="Vertical">
+        <Image Source="/Resources/Images/pumpkin.png" 
+               Width="256" Height="256"
+               VerticalAlignment="Center"/>
+        <TextBlock Text="虎踞龙蟠BBS" 
+                   HorizontalAlignment="Center"
+                   FontSize="24"
+                   Margin="0 40 0 50"/>
+        <HyperlinkButton Content="©ND"
+                         Margin="0 0 0 15"
+                         NavigateUri="{Binding SbbsUri}"
+                         TargetName="_blank"/>
+        <HyperlinkButton Content="@Peter_舅舅"                                             
+                         NavigateUri="{Binding WeiboUri}"
+                         TargetName="_blank"/>
+    </StackPanel>
+</UserControl>
